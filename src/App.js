@@ -91,7 +91,7 @@ const App = () => {
       <Container maxWidth="sm">
         <animated.div style={fadeIn}>
           <Box sx={{ mt: 4, mb: 2 }}>
-            <Typography variant="h4" component="h1" align="center">
+            <Typography variant="h4" component="h1" align="center" color="primary">
               Asset Portfolio Calculator
             </Typography>
           </Box>
@@ -105,6 +105,9 @@ const App = () => {
                   fullWidth
                   required
                   margin="normal"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
               />
               <TextField
                   label="Initial Balance"
@@ -152,15 +155,26 @@ const App = () => {
                   </Typography>
               )}
               <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-                <Button type="submit" disabled={loading} variant="contained">
-                  {loading ? <CircularProgress size={24} /> : 'Calculate'}
+                <Button type="submit" disabled={loading} variant="contained" color="primary">
+                  {loading ? <CircularProgress size={24} color="inherit" /> : 'Calculate'}
                 </Button>
               </Box>
             </form>
           </Box>
           {portfolioValue.length > 0 && (
               <Box sx={{ mt: 4 }}>
-                <Line data={chartData} />
+                <Line
+                    data={chartData}
+                    options={{
+                      plugins: {
+                        legend: {
+                          labels: {
+                            color: 'primary',
+                          },
+                        },
+                      },
+                    }}
+                />
               </Box>
           )}
         </animated.div>
